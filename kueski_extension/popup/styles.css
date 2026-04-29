@@ -54,6 +54,7 @@ body {
 .card {
 	padding: 18px;
 	border-radius: 14px;
+	transition: all 0.1s linear;
 }
 
 /* BALANCE */
@@ -63,6 +64,10 @@ body {
 	padding: 22px 18px;
 	border-radius: 14px;
 	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
+}
+
+.balance-card:hover {
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
 }
 
 .icon-circle {
@@ -104,6 +109,10 @@ body {
 	color: #111;
 }
 
+.cashback-card:hover {
+	border: 2px solid #cdcdcd;
+}
+
 .card-title {
 	font-size: 16px;
 	font-weight: 700;
@@ -123,8 +132,13 @@ body {
 
 /* REWARD */
 .reward-card {
-	background: #e6f0e4;
+	border: 1px solid #d2f6cb;
+	background: #eeffeb;
 	color: #111;
+}
+
+.reward-card:hover {
+	border: 1px solid #bbebb1;
 }
 
 .reward-card .card-title {
