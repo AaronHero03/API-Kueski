@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;700&display=swap");
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: "Instrument Sans", Impact;
+	display: flex;
+	justify-content: center;
+	background-color: red;
+	margin: 0;
+	padding: 16px;
+}
+
+h1 {
+	font-size: 22px;
+	font-weight: bold;
+}
+
+.kueski-container {
+	background-color: #ffffff;
+	width: 300px;
+	border-radius: 10px;
+	aspect-ratio: 5/7;
+	box-shadow: none;
+	padding: 20px;
+}
+
+.header {
+	width: 100%;
+	background-color: antiquewhite;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.logo {
+	margin-top: 10px;
+	width: 50%;
+}
+
+.header h1 {
+	text-align: center;
+	margin: 6px 0px;
+}
+
+.balance-card {
+	width: 100%;
+	background-color: aliceblue;
+	padding: 16px;
+	padding-top: 40px;
+}
