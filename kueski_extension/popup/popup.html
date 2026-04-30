@@ -8,34 +8,76 @@
 		<link rel="stylesheet" href="normalize.css" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<style>
+			.hidden {
+				display: none !important;
+			}
+		</style>
 	</head>
 	<body>
-		<div class="kueski-container">
-			<div class="header">
-				<img src="kueski.png" alt="Kueski" class="logo" />
-				<h1>Tu cuenta KueskiPay</h1>
+		<div class="kueski-popup" id="login">
+			<div class="popup-header">
+				<span></span>
+				<button class="close-btn" aria-label="Cerrar">&times;</button>
 			</div>
 
-			<div class="balance-card card">
-				<div class="icon-circle">$</div>
-				<div class="balance-label">Saldo total</div>
-				<div class="balance-amount">
-					$3,250.00 <span class="currency">MXN</span>
-				</div>
+			<div class="popup-head">
+				<img src="kueski.png" alt="Kueski" />
+				<h1>Inicia sesión</h1>
 			</div>
 
-			<div class="cashback-card card">
-				<div class="card-title">Cashback Acumulado</div>
-				<div class="card-amount">$155.00 <span class="currency">MXN</span></div>
+			<div class="forms">
+				<input type="email" placeholder="Correo electrónico" class="field" />
+				<input type="password" placeholder="Contraseña" class="field" />
 			</div>
 
-			<div class="reward-card card">
-				<div class="card-title">Recompensa en esta tienda</div>
-				<div class="card-amount">
-					Gana $9.50 <span class="currency">MXN</span>
-				</div>
-				<div class="reward-subtitle">estimado con tu 5% de cashback.</div>
+			<div class="secondary-btn">
+				<a href="#" class="secondary-text emphatize"
+					>¿Olvidaste tu contraseña?</a
+				>
+			</div>
+
+			<button class="primary-btn rounded" id="go-to-not">Iniciar sesión</button>
+
+			<div id="not-account" class="secondary-text">
+				¿Aun no tienes cuenta?
+				<a href="#" class="emphatize secondary-text">Crear una cuenta</a>
 			</div>
 		</div>
+
+		<div id="dashboard" class="hidden">
+			<div class="kueski-container">
+				<div class="header">
+					<img src="kueski.png" alt="Kueski" class="logo" />
+					<h1>Tu cuenta KueskiPay</h1>
+				</div>
+
+				<div class="balance-card card">
+					<div class="icon-circle">$</div>
+					<div class="balance-label">Saldo total</div>
+					<div class="balance-amount">
+						$3,250.00 <span class="currency">MXN</span>
+					</div>
+				</div>
+
+				<div class="cashback-card card">
+					<div class="card-title">Cashback Acumulado</div>
+					<div class="card-amount">
+						$155.00 <span class="currency">MXN</span>
+					</div>
+				</div>
+
+				<div class="reward-card card">
+					<div class="card-title">Recompensa en esta tienda</div>
+					<div class="card-amount">
+						Gana $9.50 <span class="currency">MXN</span>
+					</div>
+					<div class="reward-subtitle">estimado con tu 5% de cashback.</div>
+				</div>
+			</div>
+		</div>
+		<!-- CAMBIO: Cerrado el div del dashboard -->
+
+		<script src="popup.js"></script>
 	</body>
 </html>

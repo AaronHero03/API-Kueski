@@ -1,19 +1,30 @@
-// 1. Obtenemos el dominio limpio (ej: amazon.com.mx)
 const currentDomain = window.location.hostname.replace("www.", "");
 
 // 2. Le mandamos un mensaje al "cerebro" (Background Script)
 chrome.runtime.sendMessage(
 	{ type: "CHECK_STORE", payload: { domain: currentDomain } },
 	(response) => {
-		// Para probarlo directamente, puedes comentar el if y solo llamar a la función:
-		// showKueskiPopup(5, currentDomain);
-
 		if (response && response.is_partner) {
-			showKueskiPopup(response.cashback_percentage, currentDomain);
+			// 3. Revisar si el usuario ya inició sesión ANTES de inyectar nada
+			chrome.storage.session.get(["isLoggedIn"], (result) => {
+				if (!result.isLoggedIn) {
+					// Si NO hay sesión activa, mostramos la invitación
+					showKueskiPopup(response.cashback_percentage, currentDomain);
+				} else {
+					// Si YA hay sesión activa, evitamos molestar al usuario.
+					// Opcional: Podrías hacer un console.log para tus pruebas
+					console.log(
+						"KueskiPay: Cashback activo, usuario ya logeado. Popup silenciado.",
+					);
+
+					// OJO: En un futuro, en lugar de no hacer nada, aquí podrías
+					// llamar a otra función que inyecte un botón súper chiquito y discreto
+					// en la esquina que diga "Kueski: 5% Cashback activado ✅"
+				}
+			});
 		}
 	},
 );
-
 function showKueskiPopup(cashbackPercentage, domain) {
 	// Evitar inyectar múltiples veces
 	if (document.getElementById("kueski-extension-root")) return;
@@ -244,7 +255,7 @@ function showKueskiPopup(cashbackPercentage, domain) {
 			// Validación súper básica
 			if (emailInput.includes("@") && passwordInput.length > 0) {
 				// Guardamos en el almacenamiento de Chrome
-				chrome.storage.local.set(
+				chrome.storage.session.set(
 					{
 						isLoggedIn: true,
 						userEmail: emailInput,
@@ -266,4 +277,4 @@ function showKueskiPopup(cashbackPercentage, domain) {
 			}
 		});
 	});
-} // <-- Aquí cierra la función showKueskiPopup principal
+}

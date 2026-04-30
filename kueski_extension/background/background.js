@@ -1,5 +1,12 @@
 // src/background/background.js
 
+chrome.runtime.onInstalled.addListener(() => {
+	// Esto desbloquea chrome.storage.session para tus content scripts
+	chrome.storage.session.setAccessLevel({
+		accessLevel: "TRUSTED_AND_UNTRUSTED_CONTEXTS",
+	});
+});
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 	if (message.type === "CHECK_STORE") {
 		const domain = message.payload.domain;
