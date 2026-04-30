@@ -13,11 +13,11 @@
 			@keyframes kueskiSlideIn {
 				from {
 					opacity: 0;
-					transform: translateY(20px); /* Empieza 20px abajo */
+					transform: translateY(20px);
 				}
 				to {
 					opacity: 1;
-					transform: translateY(0); /* Termina en su posición original */
+					transform: translateY(0);
 				}
 			}
 
@@ -45,6 +45,12 @@
 
 				animation: kueskiSlideIn 0.5s ease-out forwards;
 				opacity: 0;
+			}
+
+			/* MODIFICADOR DE PROPORCIÓN PARA TARJETA NUEVA */
+			.ratio-5-7 {
+				aspect-ratio: 5/7;
+				width: 340px;
 			}
 
 			.popup-header {
@@ -80,6 +86,11 @@
 
 			.popup-head img {
 				width: 120px;
+			}
+
+			/* UTILIDAD PARA CENTRAR TEXTOS */
+			.text-center {
+				text-align: center;
 			}
 
 			.popup-content h1 {
@@ -175,40 +186,112 @@
 				font-size: 17px;
 			}
 
+			/* CIRCULO MODIFICADO (BASE) */
 			.circle {
 				width: 125px;
 				border-radius: 50%;
 				aspect-ratio: 1/1;
-				border: 3px solid blue;
+				border: 4px solid #3baaf8;
+				box-shadow: 0 0 25px rgba(59, 170, 248, 0.4);
 				display: flex;
-				margin-bottom: 1px;
+				margin-bottom: 20px;
 				align-items: center;
 				justify-content: center;
+			}
+
+			/* MODIFICADOR DE CÍRCULO AMARILLO */
+			.warning-circle {
+				border-color: #fce21d;
+				box-shadow: 0 0 25px rgba(252, 226, 29, 0.4);
+			}
+
+			.warning-icon {
+				font-size: 55px;
+				font-weight: 700;
+				color: #222222;
+			}
+
+			.checkmark-svg {
+				width: 55px;
+				height: auto;
+				color: #49d233;
+			}
+
+			/* CLASES PARA INFO DE USUARIO */
+			.user-profile {
+				display: flex;
+				align-items: center;
+				gap: 12px;
+				margin-top: 24px;
+				text-align: left;
+			}
+
+			.user-icon-svg {
+				width: 45px;
+				height: 45px;
+				color: #2b95fa;
+			}
+
+			.user-details {
+				display: flex;
+				flex-direction: column;
+			}
+
+			.user-name {
+				font-size: 15px;
+				font-weight: 600;
+				color: #000000;
+			}
+
+			.user-email {
+				font-size: 14px;
+				color: #8f8f8f;
+				font-weight: 400;
 			}
 
 			#not-account {
 				margin-top: 20px;
 			}
+
+			/* CLASES PARA CAJA DE DESGLOSE */
+			.breakdown-box {
+				text-align: left;
+				margin-bottom: 20px;
+			}
+
+			.breakdown-box h3 {
+				margin-top: 0;
+				font-size: 15px;
+				font-weight: 600;
+				margin-bottom: 8px;
+				color: #000000;
+			}
+
+			.breakdown-box p {
+				font-size: 14px;
+				color: #222222;
+				margin-bottom: 4px;
+				font-weight: 400;
+			}
+
+			.breakdown-box p:last-child {
+				margin-bottom: 0;
+			}
 		</style>
 
+		<!-- TARJETA 1: NOTIFICACIÓN CASHBACK -->
 		<div class="kueski-popup" id="notification">
 			<div class="popup-header">
 				<img src="kueski.png" alt="Kueski" class="logo" />
-				<button class="close-btn" id="close-kueski" aria-label="Cerrar">
-					&times;
-				</button>
+				<button class="close-btn" aria-label="Cerrar">&times;</button>
 			</div>
 
 			<div class="popup-content">
 				<h1>¡Atención, Cashback activo!</h1>
 				<h2>KueskiPay ha detectado beneficios</h2>
-
 				<p>
-					¡Felicidades! Gana un ${cashback}% de cashback en tus compras de
-					<span style="text-transform: capitalize"
-						>${storeName.split(".")[0]}</span
-					>
-					con KueskiPay.
+					¡Felicidades! Gana un 5% de cashback en tus compras de
+					<span style="text-transform: capitalize">Adidas</span> con KueskiPay.
 				</p>
 				<p>Inicia sesión para recibir tus beneficios y ver más ofertas.</p>
 			</div>
@@ -218,16 +301,15 @@
 			</button>
 		</div>
 
+		<!-- TARJETA 2: LOGIN -->
 		<div class="kueski-popup" id="login">
 			<div class="popup-header">
 				<span></span>
-				<button class="close-btn" id="close-kueski" aria-label="Cerrar">
-					&times;
-				</button>
+				<button class="close-btn" aria-label="Cerrar">&times;</button>
 			</div>
 
 			<div class="popup-head">
-				<img src="kueski.png" />
+				<img src="kueski.png" alt="Kueski" />
 				<h2>Inicia sesión</h2>
 			</div>
 
@@ -250,23 +332,87 @@
 			</div>
 		</div>
 
+		<!-- TARJETA 3: ÉXITO -->
 		<div class="kueski-popup" id="successful">
 			<div class="popup-header">
 				<span></span>
-				<button class="close-btn" id="close-kueski" aria-label="Cerrar">
-					&times;
-				</button>
+				<button class="close-btn" aria-label="Cerrar">&times;</button>
 			</div>
 
 			<div class="popup-head">
-				<img src="kueski.png" />
-				<h2>Bienvenido de nuevo</h2>
+				<img src="kueski.png" alt="Kueski" />
+				<h2>¡Bienvenido de nuevo!</h2>
 			</div>
 
 			<div class="successful-logo">
-				<div class="circle">o</div>
+				<div class="circle">
+					<svg
+						class="checkmark-svg"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="4"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					>
+						<polyline points="20 6 9 17 4 12"></polyline>
+					</svg>
+				</div>
 				<p>Sesión iniciada con éxito en tu cuenta Kueski</p>
+
+				<div class="user-profile">
+					<svg
+						class="user-icon-svg"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="1.5"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					>
+						<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+						<circle cx="12" cy="7" r="4"></circle>
+					</svg>
+					<div class="user-details">
+						<span class="user-name">Hola, Juan M.</span>
+						<span class="user-email">juanm123@gmail.com</span>
+					</div>
+				</div>
 			</div>
+		</div>
+
+		<!-- TARJETA 4: SALDO INSUFICIENTE (NUEVA) -->
+		<div class="kueski-popup ratio-5-7" id="insufficient-funds">
+			<div class="popup-header">
+				<img src="kueski.png" alt="Kueski" class="logo" />
+				<button class="close-btn" aria-label="Cerrar">&times;</button>
+			</div>
+
+			<div class="popup-content text-center">
+				<h1 style="margin-bottom: 24px">Saldo insuficiente</h1>
+			</div>
+
+			<div class="successful-logo">
+				<div class="circle warning-circle">
+					<span class="warning-icon">!</span>
+				</div>
+				<p style="font-weight: 400; font-size: 15px; line-height: 1.3">
+					Tu saldo actual en KueskiPay no es<br />suficiente para completar esta
+					compra.
+				</p>
+			</div>
+
+			<div class="field breakdown-box">
+				<h3>Desglose de compra</h3>
+				<p>Total compra $2,499.00 MXN</p>
+				<p>Saldo disponible: $1,250.00 MXN</p>
+				<p>Saldo faltante: $1,249.00 MXN</p>
+			</div>
+
+			<!-- margin-top: auto empuja el botón al fondo de la tarjeta 5/7 -->
+			<button class="primary-btn rounded" style="margin-top: auto">
+				Ir a KueskiPay
+			</button>
 		</div>
 	</body>
 </html>
