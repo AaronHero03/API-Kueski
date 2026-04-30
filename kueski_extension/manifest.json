@@ -22,9 +22,16 @@
 
 	"content_scripts": [
 		{
-			"matches": ["https://*/*"],
-			"js": ["content/content-script.js"],
+			"matches": ["<all_urls>"],
+			"js": ["content/notification.js", "content/content-script.js"],
 			"run_at": "document_end"
+		}
+	],
+
+	"web_accessible_resources": [
+		{
+			"resources": ["assets/kueski.png"],
+			"matches": ["<all_urls>"]
 		}
 	]
 }

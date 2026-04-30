@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<style>
+			@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&display=swap");
+
+			/* 1. DEFINIR LA ANIMACIÓN (Keyframes) */
+			@keyframes kueskiSlideIn {
+				from {
+					opacity: 0;
+					transform: translateY(20px); /* Empieza 20px abajo */
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0); /* Termina en su posición original */
+				}
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				padding: 20px;
+				gap: 20px;
+			}
+
+			.kueski-popup {
+				font-family: "Instrument Sans", sans-serif;
+				background: #ffffff;
+				aspect-ratio: 3/4;
+				width: 360px;
+				padding: 24px;
+				border-radius: 16px;
+				box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+				display: flex;
+				flex-direction: column;
+
+				animation: kueskiSlideIn 0.5s ease-out forwards;
+				opacity: 0;
+			}
+
+			.popup-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-start;
+				margin-bottom: 30px;
+			}
+
+			.logo {
+				height: 28px;
+				width: auto;
+			}
+
+			.close-btn {
+				background: none;
+				border: none;
+				font-size: 30px;
+				color: #a3a3a3;
+				cursor: pointer;
+				line-height: 0.8;
+				padding: 0;
+			}
+
+			.close-btn:hover {
+				color: #666666;
+			}
+
+			.popup-head {
+				text-align: center;
+				margin-bottom: 16px;
+			}
+
+			.popup-head img {
+				width: 120px;
+			}
+
+			.popup-content h1 {
+				font-size: 26px;
+				font-weight: 700;
+				color: #000000;
+				line-height: 1.2;
+				margin-bottom: 10px;
+			}
+
+			.popup-content h2 {
+				font-size: 18px;
+				font-weight: 700;
+				color: #000000;
+				margin-bottom: 24px;
+			}
+
+			.popup-content p {
+				font-size: 17px;
+				font-weight: 400;
+				color: #111111;
+				line-height: 1.4;
+				margin-bottom: 16px;
+			}
+
+			.popup-content p:last-of-type {
+				margin-bottom: 24px;
+			}
+
+			.primary-btn {
+				background-color: #2b95fa;
+				color: #ffffff;
+				border: none;
+				font-weight: 600;
+				font-family: inherit;
+				font-size: 16px;
+				border-radius: 8px;
+				padding: 16px;
+				width: 100%;
+
+				transition: background-color 0.2s ease;
+			}
+
+			.primary-btn:hover {
+				background-color: #1c81df;
+			}
+
+			.secondary-btn {
+				text-align: left;
+				margin-bottom: 20px;
+			}
+
+			.forms {
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				gap: 10px;
+				margin-bottom: 4px;
+			}
+
+			.field {
+				border: 1px solid rgb(214, 214, 214);
+				font-family: inherit;
+				font-size: 16px;
+				border-radius: 8px;
+				padding: 16px;
+				width: 100%;
+			}
+
+			.secondary-text {
+				text-decoration: none;
+				font-size: 15px;
+			}
+
+			.emphatize {
+				font-weight: bold;
+				color: #00aaff;
+			}
+
+			.rounded {
+				border-radius: 50px;
+			}
+
+			.successful-logo {
+				width: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin-bottom: 10px;
+				flex-direction: column;
+				text-align: center;
+				font-weight: 500;
+				font-size: 17px;
+			}
+
+			.circle {
+				width: 125px;
+				border-radius: 50%;
+				aspect-ratio: 1/1;
+				border: 3px solid blue;
+				display: flex;
+				margin-bottom: 1px;
+				align-items: center;
+				justify-content: center;
+			}
+
+			#not-account {
+				margin-top: 20px;
+			}
+		</style>
+
+		<div class="kueski-popup" id="notification">
+			<div class="popup-header">
+				<img src="kueski.png" alt="Kueski" class="logo" />
+				<button class="close-btn" id="close-kueski" aria-label="Cerrar">
+					&times;
+				</button>
+			</div>
+
+			<div class="popup-content">
+				<h1>¡Atención, Cashback activo!</h1>
+				<h2>KueskiPay ha detectado beneficios</h2>
+
+				<p>
+					¡Felicidades! Gana un ${cashback}% de cashback en tus compras de
+					<span style="text-transform: capitalize"
+						>${storeName.split(".")[0]}</span
+					>
+					con KueskiPay.
+				</p>
+				<p>Inicia sesión para recibir tus beneficios y ver más ofertas.</p>
+			</div>
+
+			<button class="field primary-btn" id="go-to-login">
+				Inicia Sesión en KueskiPay
+			</button>
+		</div>
+
+		<div class="kueski-popup" id="login">
+			<div class="popup-header">
+				<span></span>
+				<button class="close-btn" id="close-kueski" aria-label="Cerrar">
+					&times;
+				</button>
+			</div>
+
+			<div class="popup-head">
+				<img src="kueski.png" />
+				<h2>Inicia sesión</h2>
+			</div>
+
+			<div class="forms">
+				<input type="email" placeholder="Correo electrónico" class="field" />
+				<input type="password" placeholder="Contraseña" class="field" />
+			</div>
+
+			<div class="secondary-btn">
+				<a href="#" class="secondary-text emphatize"
+					>¿Olvidaste tu contraseña?</a
+				>
+			</div>
+
+			<button class="primary-btn rounded" id="go-to-not">Iniciar sesión</button>
+
+			<div id="not-account" class="secondary-text">
+				¿Aun no tienes cuenta?
+				<a href="#" class="emphatize secondary-text">Crear una cuenta</a>
+			</div>
+		</div>
+
+		<div class="kueski-popup" id="successful">
+			<div class="popup-header">
+				<span></span>
+				<button class="close-btn" id="close-kueski" aria-label="Cerrar">
+					&times;
+				</button>
+			</div>
+
+			<div class="popup-head">
+				<img src="kueski.png" />
+				<h2>Bienvenido de nuevo</h2>
+			</div>
+
+			<div class="successful-logo">
+				<div class="circle">o</div>
+				<p>Sesión iniciada con éxito en tu cuenta Kueski</p>
+			</div>
+		</div>
+	</body>
+</html>
