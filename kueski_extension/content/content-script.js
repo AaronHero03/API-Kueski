@@ -206,7 +206,7 @@ function showKueskiPopup(cashbackPercentage, domain) {
 					<circle cx="12" cy="7" r="4"></circle>
 				</svg>
 				<div class="user-details">
-					<span class="user-name">Hola, Juan M.</span>
+					<span class="user-name">Hola, KueskiUser.</span>
 					<span class="user-email">juanm123@gmail.com</span>
 				</div>
 			</div>
@@ -221,34 +221,49 @@ function showKueskiPopup(cashbackPercentage, domain) {
 	shadow.innerHTML = styles;
 	shadow.appendChild(viewContainer);
 	document.body.appendChild(container);
-
 	// --- LÓGICA DE EVENTOS ---
 
 	// Función para cerrar el popup
 	const closePopup = () => container.remove();
 
-	// Escuchar el clic de cerrar en la primera vista
 	shadow.querySelector("#close-kueski").addEventListener("click", closePopup);
 
-	// Escuchar el clic para ir al Login
 	shadow.querySelector("#go-to-login").addEventListener("click", () => {
-		// 1. Cambiamos el HTML al de login
 		viewContainer.innerHTML = loginHTML;
 
-		// 2. Volvemos a asignar el evento de cerrar (porque el botón anterior se destruyó)
 		shadow
 			.querySelector("#close-kueski-login")
 			.addEventListener("click", closePopup);
 
-		// 3. Puedes agregar el evento para cuando inicien sesión con éxito
 		shadow.querySelector("#submit-login").addEventListener("click", () => {
-			viewContainer.innerHTML = successfulHTML;
-			console.log("Hacer fetch a la API de login...");
+			const emailInput = shadow.querySelector('input[type="email"]').value;
+			const passwordInput = shadow.querySelector(
+				'input[type="password"]',
+			).value;
 
-			shadow
-				.querySelector("#close-kueski-success")
-				.addEventListener("click", closePopup);
-			// Aquí podrías inyectar viewContainer.innerHTML = successfulHTML;
+			// Validación súper básica
+			if (emailInput.includes("@") && passwordInput.length > 0) {
+				// Guardamos en el almacenamiento de Chrome
+				chrome.storage.local.set(
+					{
+						isLoggedIn: true,
+						userEmail: emailInput,
+					},
+					() => {
+						console.log("Mock de sesión guardado con éxito.");
+
+						viewContainer.innerHTML = successfulHTML;
+						shadow.querySelector(".user-email").textContent = emailInput;
+
+						shadow
+							.querySelector("#close-kueski-success")
+							.addEventListener("click", closePopup);
+					},
+				);
+			} else {
+				console.log("Por favor ingresa un correo válido y una contraseña.");
+				alert("Por favor ingresa un correo y contraseña válidos.");
+			}
 		});
 	});
-}
+} // <-- Aquí cierra la función showKueskiPopup principal
