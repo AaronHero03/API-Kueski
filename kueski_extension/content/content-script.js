@@ -7,7 +7,7 @@ chrome.runtime.sendMessage(
 	(response) => {
 		if (response && response.is_partner) {
 			// 3. Revisar el estado de sesión
-			chrome.storage.session.get(["isLoggedIn"], (result) => {
+			chrome.storage.local.get(["isLoggedIn"], (result) => {
 				if (!result.isLoggedIn) {
 					// Usuario NO logeado -> Mostrar popup grande para iniciar sesión
 					showKueskiPopup(response.cashback_percentage, currentDomain);
@@ -366,7 +366,7 @@ function showKueskiPopup(cashbackPercentage, domain) {
 			// Validación súper básica
 			if (emailInput.includes("@") && passwordInput.length > 0) {
 				// Guardamos en el almacenamiento de Chrome
-				chrome.storage.session.set(
+				chrome.storage.local.set(
 					{
 						isLoggedIn: true,
 						userEmail: emailInput,
